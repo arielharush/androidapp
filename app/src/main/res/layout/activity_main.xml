@@ -1,0 +1,294 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity"
+    android:orientation="vertical"
+    android:gravity="left"
+    android:weightSum="15"
+    >
+
+
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="14"
+        android:orientation="vertical"
+        android:focusable="true"
+        android:focusableInTouchMode="true"
+        >
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_gravity="left"
+        android:layout_weight="9"
+        >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:gravity="left"
+          android:padding="25dp">
+            <TextView
+                android:layout_marginTop="20dp"
+                android:id="@+id/textView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/type_of_the_pack"
+                android:gravity="center_vertical"     />
+
+            <Spinner
+                android:id="@+id/type_spinner"
+                android:layout_marginTop="5dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+
+                />
+            <TextView
+                android:layout_marginTop="30dp"
+                android:id="@+id/textView3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/breakable" />
+            <Spinner
+                android:layout_marginTop="5dp"
+                android:id="@+id/breakable_spinner"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+            <TextView
+                android:layout_marginTop="30dp"
+                android:layout_width="wrap_content"
+                android:text="@string/Package_weight"
+                android:layout_height="wrap_content"/>
+            <Spinner
+                android:layout_marginTop="5dp"
+                android:id="@+id/package_weight_spinner"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:focusedByDefault="true"
+                />
+            <EditText
+                android:layout_marginTop="30dp"
+                android:id="@+id/phoneNumber"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="left"
+                android:drawablePadding="12dp"
+                android:drawableStart="@drawable/ic_android_black_24dp"
+                android:hint="Phone number"
+                android:inputType="phone"
+                android:layout_marginRight="15dp"
+                android:maxLength="10"
+                />
+           <LinearLayout
+               android:layout_width="match_parent"
+               android:layout_height="match_parent"
+               android:orientation="horizontal"
+               android:visibility="visible"
+
+               >
+
+
+               <EditText
+                   android:layout_marginTop="30dp"
+                   android:id="@+id/pckageinner"
+                   android:layout_width="0dp"
+                   android:layout_height="wrap_content"
+                   android:gravity="left"
+                   android:drawablePadding="12dp"
+                   android:drawableStart="@drawable/ic_android_black_24dp"
+                   android:hint="F.Name"
+                   android:inputType="text"
+                   android:layout_marginRight="15dp"
+                   android:enabled="false"
+                   android:layout_weight="1"
+                   />
+
+               <EditText
+                   android:layout_marginTop="30dp"
+                   android:id="@+id/pckagenner"
+                   android:layout_width="0dp"
+                   android:layout_height="wrap_content"
+                   android:gravity="left"
+                   android:drawablePadding="12dp"
+                   android:drawableStart="@drawable/ic_android_black_24dp"
+                   android:hint="L.Name"
+                   android:inputType="text"
+                   android:layout_marginRight="15dp"
+                   android:enabled="false"
+                   android:layout_weight="1"
+                   />
+
+
+
+           </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal"
+                android:weightSum="5"
+                android:visibility="visible"
+                >
+
+
+                <EditText
+                    android:layout_marginTop="30dp"
+                    android:id="@+id/pckfageinner"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:gravity="left"
+                    android:drawablePadding="12dp"
+                    android:drawableStart="@drawable/ic_android_black_24dp"
+                    android:hint="Country"
+                    android:inputType="text"
+                    android:layout_marginRight="15dp"
+                    android:enabled="false"
+                    android:layout_weight="2"
+
+                    />
+
+                <EditText
+
+                    android:layout_marginTop="30dp"
+                    android:id="@+id/pfckagenner"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:gravity="left"
+                    android:drawablePadding="12dp"
+                    android:drawableStart="@drawable/ic_android_black_24dp"
+                    android:hint="Beit Shemesh"
+                    android:inputType="text"
+                    android:layout_marginRight="15dp"
+                    android:enabled="false"
+                    android:layout_weight="3"
+                    android:textSize="16sp"
+                    />
+
+
+
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal"
+                android:weightSum="5"
+                android:visibility="visible"
+                >
+
+
+                <EditText
+                    android:layout_marginTop="30dp"
+                    android:id="@+id/pjckfageinner"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:gravity="left"
+                    android:drawablePadding="12dp"
+                    android:drawableStart="@drawable/ic_android_black_24dp"
+                    android:hint="Country"
+                    android:inputType="text"
+                    android:layout_marginRight="15dp"
+                    android:enabled="false"
+                    android:layout_weight="2"
+
+                    />
+
+                <EditText
+
+                    android:layout_marginTop="30dp"
+                    android:id="@+id/pfckjagenner"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:gravity="left"
+                    android:drawablePadding="12dp"
+                    android:drawableStart="@drawable/ic_android_black_24dp"
+                    android:hint="Street"
+                    android:inputType="text"
+                    android:layout_marginRight="15dp"
+                    android:enabled="false"
+                    android:layout_weight="3"
+                    android:textSize="16sp"
+                    />
+
+
+
+
+
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal"
+                android:weightSum="2"
+                android:visibility="visible"
+                >
+
+
+                <EditText
+                    android:layout_marginTop="30dp"
+                    android:id="@+id/pdjckfageinner"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:gravity="left"
+                    android:drawablePadding="12dp"
+                    android:drawableStart="@drawable/ic_android_black_24dp"
+                    android:hint="Number"
+                    android:inputType="text"
+                    android:layout_marginRight="15dp"
+                    android:enabled="false"
+                    android:layout_weight="1"
+
+                    />
+
+                <EditText
+
+                    android:layout_marginTop="30dp"
+                    android:id="@+id/dpfckjagenner"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:gravity="left"
+                    android:drawablePadding="5dp"
+
+                    android:hint="Zip"
+                    android:inputType="text"
+                    android:layout_marginRight="15dp"
+                    android:enabled="false"
+                    android:layout_weight="1"
+                    android:textSize="16sp"
+                    />
+
+
+
+
+
+            </LinearLayout>
+        </LinearLayout>
+
+
+
+
+    </ScrollView>
+
+
+
+
+    </LinearLayout>
+
+
+
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:background="@color/design_default_color_primary"
+        >
+
+    </LinearLayout>
+</LinearLayout>

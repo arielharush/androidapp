@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Logisticare</string>
+    <string name="spinner_size_pack">Size of pack</string>
+    <string-array name="type_list">
+        <item>Envelope</item>
+        <item>Small pack</item>
+        <item>Big pack</item>
+    </string-array>
+    <string-array name="breakable_list">
+        <item>Yes</item>
+        <item>NO</item>
+    </string-array>
+    <string-array name="Package_weight_list">
+        <item>Up to 500 gr</item>
+        <item>Up to 1 kg</item>
+        <item>Up to 5 kg</item>
+        <item>Up to 20 kg</item>
+    </string-array>
+    <string name="Package_weight">Package weight</string>
+    <string name="type_of_the_pack">Type of the pack</string>
+    <string name="breakable">Breakable?</string>
+</resources>

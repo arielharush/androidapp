@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">שליחת חבילה</string>
+    <string name="spinner_size_pack">גודל החבילה</string>
+    <string-array name="type_list">
+        <item>מעטפה</item>
+        <item>חבילה קטנה</item>
+        <item>חבילה גדולה</item>
+    </string-array>
+    <string-array name="breakable_list">
+        <item>כן</item>
+        <item>לא</item>
+    </string-array>
+    <string-array name="Package_weight_list">
+        <item>עד 500 גר</item>
+        <item>עד 1 קילו</item>
+        <item>עד 5 קילו</item>
+        <item>עד 20 קילו</item>
+    </string-array>
+    <string name="Package_weight">משקל החבילה</string>
+    <string name="type_of_the_pack">סוג החבילה</string>
+    <string name="breakable">שביר?</string>
+</resources>
