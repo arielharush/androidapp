@@ -80,7 +80,6 @@
                 android:layout_height="wrap_content"
                 android:gravity="left"
                 android:drawablePadding="12dp"
-                android:drawableStart="@drawable/ic_android_black_24dp"
                 android:hint="Phone number"
                 android:inputType="phone"
                 android:layout_marginRight="15dp"
@@ -102,7 +101,7 @@
                    android:layout_height="wrap_content"
                    android:gravity="left"
                    android:drawablePadding="12dp"
-                   android:drawableStart="@drawable/ic_android_black_24dp"
+
                    android:hint="F.Name"
                    android:inputType="text"
                    android:layout_marginRight="15dp"
@@ -117,7 +116,6 @@
                    android:layout_height="wrap_content"
                    android:gravity="left"
                    android:drawablePadding="12dp"
-                   android:drawableStart="@drawable/ic_android_black_24dp"
                    android:hint="L.Name"
                    android:inputType="text"
                    android:layout_marginRight="15dp"
@@ -144,7 +142,6 @@
                     android:layout_height="wrap_content"
                     android:gravity="left"
                     android:drawablePadding="12dp"
-                    android:drawableStart="@drawable/ic_android_black_24dp"
                     android:hint="Country"
                     android:inputType="text"
                     android:layout_marginRight="15dp"
@@ -161,7 +158,6 @@
                     android:layout_height="wrap_content"
                     android:gravity="left"
                     android:drawablePadding="12dp"
-                    android:drawableStart="@drawable/ic_android_black_24dp"
                     android:hint="Beit Shemesh"
                     android:inputType="text"
                     android:layout_marginRight="15dp"
@@ -189,7 +185,7 @@
                     android:layout_height="wrap_content"
                     android:gravity="left"
                     android:drawablePadding="12dp"
-                    android:drawableStart="@drawable/ic_android_black_24dp"
+
                     android:hint="Country"
                     android:inputType="text"
                     android:layout_marginRight="15dp"
@@ -206,7 +202,6 @@
                     android:layout_height="wrap_content"
                     android:gravity="left"
                     android:drawablePadding="12dp"
-                    android:drawableStart="@drawable/ic_android_black_24dp"
                     android:hint="Street"
                     android:inputType="text"
                     android:layout_marginRight="15dp"
@@ -236,7 +231,7 @@
                     android:layout_height="wrap_content"
                     android:gravity="left"
                     android:drawablePadding="12dp"
-                    android:drawableStart="@drawable/ic_android_black_24dp"
+
                     android:hint="Number"
                     android:inputType="text"
                     android:layout_marginRight="15dp"
@@ -267,6 +262,21 @@
 
 
             </LinearLayout>
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <Button
+                    android:layout_marginTop="30dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="OK"/>
+
+            </LinearLayout>
+
+
+
         </LinearLayout>
 
 
