@@ -5,15 +5,19 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Context;
 import android.graphics.Point;
 import android.os.Bundle;
+import android.os.*;
 import android.view.Display;
+import android.view.View;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
 
+import com.example.logisticare.Entities.Parcel;
 import com.google.android.material.textfield.TextInputLayout;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,5 +55,17 @@ public class MainActivity extends AppCompatActivity {
 
         TextInputLayout textInputLayout = (TextInputLayout) findViewById(R.id.ee);
        // textInputLayout.getEditText().setText("23");
+    }
+
+
+    @Override
+    public void onClick(View v) {
+      //  Toast toast = new Toast(getApplicationContext());
+        Toast mToast = Toast.makeText(this, "", Toast.LENGTH_SHORT);
+        Parcel parcel = new Parcel();
+
+
+        mToast.setText(parcel.toString());
+        mToast.show();
     }
 }
