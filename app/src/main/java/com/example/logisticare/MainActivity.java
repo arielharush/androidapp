@@ -11,13 +11,15 @@ import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
 
+import com.google.android.material.textfield.TextInputLayout;
+
 public class MainActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        EditText phoneNumber = (EditText)findViewById(R.id.phoneNumber);
+       // EditText phoneNumber = (EditText)findViewById(R.id.phoneNumber);
 
 
 
@@ -47,5 +49,7 @@ public class MainActivity extends AppCompatActivity {
         adapter_package_weight.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         package_weight_spinner.setAdapter(adapter_package_weight);
 
+        TextInputLayout textInputLayout = (TextInputLayout) findViewById(R.id.ee);
+       // textInputLayout.getEditText().setText("23");
     }
 }

@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Logisticare</string>
+    <string name="app_name">DDB</string>
     <string name="spinner_size_pack">Size of pack</string>
     <string-array name="type_list">
         <item>Envelope</item>
