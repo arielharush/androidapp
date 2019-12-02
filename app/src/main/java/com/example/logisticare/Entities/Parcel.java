@@ -27,16 +27,29 @@ public class Parcel {
         this.packType = packType;
         this.breakable = breakable;
         this.packageWeight = packageWeight;
-        this.location = location;
+        this.location = new Location(location);
         this.receiver = receiver;
         this.deliveryman = deliveryman;
-        this.dateSend = dateSend;
-        this.dateReceived = dateReceived;
+        this.dateSend = new Date(dateSend.getTime());
+        this.dateReceived = new Date(dateReceived.getTime());
         this.packStatus = packStatus;
     }
 
 
+public Parcel(Parcel parcel){
 
+
+        this.id = parcel.id;
+        this.packType = parcel.packType;
+        this.breakable = parcel.breakable;
+        this.packageWeight = parcel.packageWeight;
+        this.location =  new Location(parcel.location);
+        this.receiver = parcel.receiver;
+        this.deliveryman = parcel.deliveryman;
+        this.dateSend = new Date(parcel.dateSend.getTime());
+        this.dateReceived = new Date(parcel.dateReceived.getTime());
+        this.packStatus =  parcel.packStatus;
+}
 
 
     public Parcel() {
@@ -47,8 +60,7 @@ public class Parcel {
        this.location = new Location("Location");
        this.receiver = "";
        this.deliveryman = "";
-       this.dateSend = new Date();
-       this.dateSend = Calendar.getInstance().getTime();
+       this.dateSend = new Date(Calendar.getInstance().getTime().getTime());
        this.dateReceived = null;
        this.packStatus = PackStatus.SENT;
     }
