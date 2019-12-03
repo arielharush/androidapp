@@ -11,27 +11,26 @@ public class Parcel {
     public static enum PackType{ENVELOPE,SMALL_PACK,BIG_PACK}
     public  static enum PackageWeight{UP_TO_500_GR,UP_TO_1_KG,UP_TO_5_KG,UP_TO_20_KG}
     public static enum  PackStatus{SENT,OFFER_FOR_SHIPPING,IN_THE_WHY,RECEIVED}
+
     private int id;
     PackType packType;
     boolean breakable;
     PackageWeight packageWeight;
     Location location;
-    String receiver;
-    String deliveryman;
+    User receiver;
+    User deliveryman;
     Date dateSend;
     Date dateReceived;
     PackStatus packStatus;
 
-    public Parcel(int id, PackType packType, boolean breakable, PackageWeight packageWeight, Location location, String receiver, String deliveryman, Date dateSend, Date dateReceived, PackStatus packStatus) {
+    public Parcel(int id, PackType packType, boolean breakable, PackageWeight packageWeight, Location location, User receiver, Date dateSend, PackStatus packStatus) {
         this.id = id;
         this.packType = packType;
         this.breakable = breakable;
         this.packageWeight = packageWeight;
         this.location = new Location(location);
         this.receiver = receiver;
-        this.deliveryman = deliveryman;
         this.dateSend = new Date(dateSend.getTime());
-        this.dateReceived = new Date(dateReceived.getTime());
         this.packStatus = packStatus;
     }
 
@@ -53,13 +52,13 @@ public Parcel(Parcel parcel){
 
 
     public Parcel() {
-       this.id =0;
+       this.id = 0;
        this.packType = PackType.ENVELOPE;
        this.breakable = false;
        this.packageWeight = PackageWeight.UP_TO_500_GR;
        this.location = new Location("Location");
-       this.receiver = "";
-       this.deliveryman = "";
+       this.receiver = new User();
+       this.deliveryman = new User();
        this.dateSend = new Date(Calendar.getInstance().getTime().getTime());
        this.dateReceived = null;
        this.packStatus = PackStatus.SENT;
@@ -110,19 +109,19 @@ public Parcel(Parcel parcel){
         this.location = location;
     }
 
-    public String getReceiver() {
+    public User getReceiver() {
         return receiver;
     }
 
-    public void setReceiver(String receiver) {
+    public void setReceiver(User receiver) {
         this.receiver = receiver;
     }
 
-    public String getDeliveryman() {
+    public User getDeliveryman() {
         return deliveryman;
     }
 
-    public void setDeliveryman(String deliveryman) {
+    public void setDeliveryman(User deliveryman) {
         this.deliveryman = deliveryman;
     }
 

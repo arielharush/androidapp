@@ -1,5 +1,6 @@
 package com.example.logisticare.Entities;
 
+import android.location.Address;
 import android.location.Location;
 
 public class User {
@@ -16,6 +17,14 @@ public class User {
         this.last_name = last_name;
         this.mail_address = mail_address;
         this.address = address;
+    }
+
+    public User() {
+        this.phone_number = "";
+        this.first_name = "";
+        this.last_name = "";
+        this.mail_address = "";
+        this.address = new Location(address);
     }
 
     public String getPhone_number() {
@@ -56,6 +65,17 @@ public class User {
 
     public void setAddress(Location address) {
         this.address = address;
+    }
+
+    @Override
+    public String toString() {
+        return "User{" +
+                "phone number=" + phone_number +
+                ", first name=" + first_name +
+                ", last name=" + last_name +
+                ", mail=" + mail_address +
+                ", address=" + address +
+                '}';
     }
 
 
