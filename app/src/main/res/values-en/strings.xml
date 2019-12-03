@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">DDB</string>
+    <string name="app_name">Add Parcel</string>
     <string name="spinner_size_pack">Size of pack</string>
     <string-array name="type_list">
         <item>Envelope</item>
@@ -19,5 +19,6 @@
     </string-array>
     <string name="Package_weight">Package weight</string>
     <string name="type_of_the_pack">Type of the pack</string>
+    <string name="Location_of_the_pack">Parcel location</string>
     <string name="breakable">Breakable?</string>
 </resources>

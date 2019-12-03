@@ -60,12 +60,18 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     @Override
     public void onClick(View v) {
-      //  Toast toast = new Toast(getApplicationContext());
-        Toast mToast = Toast.makeText(this, "", Toast.LENGTH_SHORT);
+        //TODO: export the selected values from the activity to our new Parcel(on the right format)
+        Spinner type_spinner = (Spinner) findViewById(R.id.type_spinner);
+        String type = type_spinner.getSelectedItem().toString();
+
+        Spinner breakable_spinner = (Spinner) findViewById(R.id.breakable_spinner);
+        String breakable = breakable_spinner.getSelectedItem().toString();
+
+
+        //TODO: check why the app fall down in the next line
         Parcel parcel = new Parcel();
 
-
-        mToast.setText(parcel.toString());
-        mToast.show();
+        //  Toast toast = new Toast(getApplicationContext());
+        Toast.makeText(this, "bla bla bla", Toast.LENGTH_SHORT).show();
     }
 }

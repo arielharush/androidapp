@@ -35,8 +35,7 @@ public class Parcel {
     }
 
 
-public Parcel(Parcel parcel){
-
+    public Parcel(Parcel parcel){
 
         this.id = parcel.id;
         this.packType = parcel.packType;

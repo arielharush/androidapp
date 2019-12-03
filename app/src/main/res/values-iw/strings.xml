@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">DDB</string>
+    <string name="app_name">הוסף חבילה</string>
     <string name="spinner_size_pack">גודל החבילה</string>
     <string-array name="type_list">
         <item>מעטפה</item>
@@ -19,5 +19,6 @@
     </string-array>
     <string name="Package_weight">משקל החבילה</string>
     <string name="type_of_the_pack">סוג החבילה</string>
+    <string name="Location_of_the_pack">מיקום החבילה</string>
     <string name="breakable">שביר?</string>
 </resources>
