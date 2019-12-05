@@ -18,10 +18,10 @@ public class Parcel {
     PackageWeight packageWeight;
     Location location;
     User receiver;
-    User deliveryman;
     Date dateSend;
-    Date dateReceived;
     PackStatus packStatus;
+    User deliveryman;
+    Date dateReceived;
 
     public Parcel(int id, PackType packType, boolean breakable, PackageWeight packageWeight, Location location, User receiver, Date dateSend, PackStatus packStatus) {
         this.id = id;

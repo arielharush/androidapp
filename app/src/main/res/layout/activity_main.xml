@@ -94,8 +94,8 @@
                     android:text="@string/Location_of_the_pack"
                     android:gravity="center_vertical"     />
             </com.google.android.material.textfield.TextInputLayout>
-            <EditText
-                android:id="@+id/editText"
+            <TextView
+                android:id="@+id/locationTextView"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:ems="10"
@@ -109,7 +109,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="Phone number"
-                android:id="@+id/ee"
+                android:id="@+id/TextInputLayoutPhoneNumber"
                 tools:ignore="InvalidId"
                 app:counterEnabled="true"
                 app:counterMaxLength="10"
@@ -123,6 +123,7 @@
                 >
 
                 <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/TextInputEditTextPhoneNumber"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:maxLength="10"
@@ -324,7 +325,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="OK"
-                    android:id="@+id/send"
+                    android:id="@+id/sendButton"
                     android:onClick="onClick"
                  />
 

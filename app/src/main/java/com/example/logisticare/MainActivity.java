@@ -4,8 +4,10 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Context;
 import android.graphics.Point;
+import android.location.Location;
 import android.os.Bundle;
 import android.os.*;
+import android.provider.ContactsContract;
 import android.view.Display;
 import android.view.View;
 import android.widget.ArrayAdapter;
@@ -15,7 +17,11 @@ import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.example.logisticare.Entities.Parcel;
+import com.example.logisticare.Entities.User;
 import com.google.android.material.textfield.TextInputLayout;
+
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
@@ -53,19 +59,56 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         adapter_package_weight.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         package_weight_spinner.setAdapter(adapter_package_weight);
 
-        TextInputLayout textInputLayout = (TextInputLayout) findViewById(R.id.ee);
+        TextInputLayout textInputLayout = (TextInputLayout) findViewById(R.id.TextInputLayoutPhoneNumber);
        // textInputLayout.getEditText().setText("23");
+
+        //Button sendButton = (Button) findViewById(R.id.sendButton);
+        //sendButton.setOnClickListener(this);
     }
+
+
+    public String convertDateToString(Date date){
+        SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss");
+        return formatter.format(date);
+    }
+
+
 
 
     @Override
     public void onClick(View v) {
-        //TODO: export the selected values from the activity to our new Parcel(on the right format)
+
+        //id
+        //TODO: take random id from firebase (maybe no need...)
+
+        //type
         Spinner type_spinner = (Spinner) findViewById(R.id.type_spinner);
         Parcel.PackType type = (Parcel.PackType)type_spinner.getSelectedItem();
 
+        //breakable
         Spinner breakable_spinner = (Spinner) findViewById(R.id.breakable_spinner);
         Boolean breakable = (Boolean) breakable_spinner.getSelectedItem();
+
+        //packageWeight
+        Spinner package_weight_spinner = (Spinner) findViewById(R.id.package_weight_spinner);
+        Parcel.PackageWeight packageWeight = (Parcel.PackageWeight) package_weight_spinner.getSelectedItem();
+
+        //location
+        String locationEditText = findViewById(R.id.locationTextView).toString();
+        //TODO: convert string type to location type
+
+        //phoneNumber (receiver)
+        String phoneNumber = findViewById(R.id.TextInputEditTextPhoneNumber).toString();
+        //TODO: pull the hole User from the firebase
+
+        //dateSend
+        Date dateSend = new Date(); //return the current date
+
+        //status
+        Parcel.PackStatus status = Parcel.PackStatus.SENT;
+
+        //date recived and reciver set in future.
+
 
 
         //TODO: check why the app fall down in the next line
