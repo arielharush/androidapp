@@ -17,19 +17,19 @@ public class Parcel {
     boolean breakable;
     PackageWeight packageWeight;
     Location location;
-    User receiver;
+    String receiver_phone;
     Date dateSend;
     PackStatus packStatus;
-    User deliveryman;
+    String deliveryman_phone;
     Date dateReceived;
 
-    public Parcel(int id, PackType packType, boolean breakable, PackageWeight packageWeight, Location location, User receiver, Date dateSend, PackStatus packStatus) {
+    public Parcel(int id, PackType packType, boolean breakable, PackageWeight packageWeight, Location location, String receiver, Date dateSend, PackStatus packStatus) {
         this.id = id;
         this.packType = packType;
         this.breakable = breakable;
         this.packageWeight = packageWeight;
         this.location = new Location(location);
-        this.receiver = receiver;
+        this.receiver_phone = receiver;
         this.dateSend = new Date(dateSend.getTime());
         this.packStatus = packStatus;
     }
@@ -42,8 +42,8 @@ public class Parcel {
         this.breakable = parcel.breakable;
         this.packageWeight = parcel.packageWeight;
         this.location =  new Location(parcel.location);
-        this.receiver = parcel.receiver;
-        this.deliveryman = parcel.deliveryman;
+        this.receiver_phone = parcel.receiver_phone;
+        this.deliveryman_phone = parcel.deliveryman_phone;
         this.dateSend = new Date(parcel.dateSend.getTime());
         this.dateReceived = new Date(parcel.dateReceived.getTime());
         this.packStatus =  parcel.packStatus;
@@ -55,9 +55,9 @@ public class Parcel {
        this.packType = PackType.ENVELOPE;
        this.breakable = false;
        this.packageWeight = PackageWeight.UP_TO_500_GR;
-       this.location = new Location("Location");
-       this.receiver = new User();
-       this.deliveryman = new User();
+       this.location = new Location("A");
+       this.receiver_phone = "";
+       this.deliveryman_phone = "";
        this.dateSend = new Date(Calendar.getInstance().getTime().getTime());
        this.dateReceived = null;
        this.packStatus = PackStatus.SENT;
@@ -108,20 +108,20 @@ public class Parcel {
         this.location = location;
     }
 
-    public User getReceiver() {
-        return receiver;
+    public String getReceiver_phone() {
+        return receiver_phone;
     }
 
-    public void setReceiver(User receiver) {
-        this.receiver = receiver;
+    public void setReceiver_phone(String receiver_phone) {
+        this.receiver_phone = receiver_phone;
     }
 
-    public User getDeliveryman() {
-        return deliveryman;
+    public String getDeliveryman_phone() {
+        return deliveryman_phone;
     }
 
-    public void setDeliveryman(User deliveryman) {
-        this.deliveryman = deliveryman;
+    public void setDeliveryman_phone(String deliveryman_phone) {
+        this.deliveryman_phone = deliveryman_phone;
     }
 
     public Date getDateSend() {
@@ -158,8 +158,8 @@ public class Parcel {
                 ", breakable=" + breakable +
                 ", packageWeight=" + packageWeight +
                 ", location=" + location +
-                ", receiver='" + receiver + '\'' +
-                ", deliveryman='" + deliveryman + '\'' +
+                ", receiver_phone='" + receiver_phone + '\'' +
+                ", deliveryman_phone='" + deliveryman_phone + '\'' +
                 ", dateSend=" + dateSend +
                 ", dateReceived=" + dateReceived +
                 ", packStatus=" + packStatus +

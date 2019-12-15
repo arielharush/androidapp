@@ -24,7 +24,7 @@ public class User {
         this.first_name = "";
         this.last_name = "";
         this.mail_address = "";
-        this.address = new Location(address);
+        this.address = new Location(" f");
     }
 
     public String getPhone_number() {
