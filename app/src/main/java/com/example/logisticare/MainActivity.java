@@ -2,6 +2,7 @@ package com.example.logisticare;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.ListActivity;
 import android.content.Context;
 import android.graphics.Point;
 import android.location.Location;
@@ -22,6 +23,10 @@ import com.google.android.material.textfield.TextInputLayout;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.HashMap;
+
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
@@ -64,6 +69,21 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         //Button sendButton = (Button) findViewById(R.id.sendButton);
         //sendButton.setOnClickListener(this);
+
+
+
+        // Write a message to the database
+        FirebaseDatabase database = FirebaseDatabase.getInstance();
+        DatabaseReference myRef = database.getReference("message");
+
+        HashMap<String,Object> hashMap = new HashMap();
+        hashMap.put("key-1","value 1 ");
+        hashMap.put("key-2","value 2 ");
+        hashMap.put("key-3","value 3 ");
+
+        myRef.setValue(hashMap);
+
+
     }
 
 
