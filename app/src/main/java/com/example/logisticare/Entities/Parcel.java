@@ -1,20 +1,15 @@
 package com.example.logisticare.Entities;
-
-
 import android.location.Location;
-
+import com.example.logisticare.Entities.Enums.*;
+import com.google.firebase.database.Exclude;
 import java.util.Calendar;
 import java.util.Date;
 
 public class Parcel {
 
-    public static enum PackType{ENVELOPE,SMALL_PACK,BIG_PACK}
-    public  static enum PackageWeight{UP_TO_500_GR,UP_TO_1_KG,UP_TO_5_KG,UP_TO_20_KG}
-    public static enum  PackStatus{SENT,OFFER_FOR_SHIPPING,IN_THE_WHY,RECEIVED}
-
-    private int id;
+    String key;
     PackType packType;
-    boolean breakable;
+    Bool breakable;
     PackageWeight packageWeight;
     Location location;
     String receiver_phone;
@@ -23,21 +18,24 @@ public class Parcel {
     String deliveryman_phone;
     Date dateReceived;
 
-    public Parcel(int id, PackType packType, boolean breakable, PackageWeight packageWeight, Location location, String receiver, Date dateSend, PackStatus packStatus) {
-        this.id = id;
+
+    public Parcel(String key, PackType packType, Bool breakable, PackageWeight packageWeight,
+                  Location location, String receiver, Date dateSend, PackStatus packStatus) {
+        this.key = key;
         this.packType = packType;
         this.breakable = breakable;
         this.packageWeight = packageWeight;
-        this.location = new Location(location);
+        this.location = location;
         this.receiver_phone = receiver;
         this.dateSend = new Date(dateSend.getTime());
         this.packStatus = packStatus;
+        this.deliveryman_phone = null ;
+        this.dateReceived = null ;
     }
 
 
     public Parcel(Parcel parcel){
-
-        this.id = parcel.id;
+        this.key = parcel.key;
         this.packType = parcel.packType;
         this.breakable = parcel.breakable;
         this.packageWeight = parcel.packageWeight;
@@ -51,29 +49,27 @@ public class Parcel {
 
 
     public Parcel() {
-       this.id = 0;
+       this.key = null;
        this.packType = PackType.ENVELOPE;
-       this.breakable = false;
+       this.breakable = Bool.No;
        this.packageWeight = PackageWeight.UP_TO_500_GR;
-       this.location = new Location("A");
-       this.receiver_phone = "";
-       this.deliveryman_phone = "";
+       this.location = null;
+       this.receiver_phone = null;
+       this.deliveryman_phone = null;
        this.dateSend = new Date(Calendar.getInstance().getTime().getTime());
        this.dateReceived = null;
        this.packStatus = PackStatus.SENT;
     }
 
-    public Parcel(Long lo) {
+    public Parcel(Long lo) { }
 
+    @Exclude
+    public String getKey() {
+        return key;
     }
 
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
+    public void setKey(String key) {
+        this.key = key;
     }
 
     public PackType getPackType() {
@@ -84,11 +80,11 @@ public class Parcel {
         this.packType = packType;
     }
 
-    public boolean isBreakable() {
+    public Bool isBreakable() {
         return breakable;
     }
 
-    public void setBreakable(boolean breakable) {
+    public void setBreakable(Bool breakable) {
         this.breakable = breakable;
     }
 
@@ -153,7 +149,7 @@ public class Parcel {
     @Override
     public String toString() {
         return "Parcel{" +
-                "id=" + id +
+                "key=" + key +
                 ", packType=" + packType +
                 ", breakable=" + breakable +
                 ", packageWeight=" + packageWeight +

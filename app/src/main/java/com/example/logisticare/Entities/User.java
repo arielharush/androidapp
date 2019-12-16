@@ -3,6 +3,8 @@ package com.example.logisticare.Entities;
 import android.location.Address;
 import android.location.Location;
 
+import com.google.firebase.database.Exclude;
+
 public class User {
 
     String phone_number;
@@ -27,6 +29,7 @@ public class User {
         this.address = new Location(" f");
     }
 
+    @Exclude
     public String getPhone_number() {
         return phone_number;
     }

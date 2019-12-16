@@ -9,7 +9,7 @@
     </string-array>
     <string-array name="breakable_list">
         <item>Yes</item>
-        <item>NO</item>
+        <item>No</item>
     </string-array>
     <string-array name="Package_weight_list">
         <item>Up to 500 gr</item>
