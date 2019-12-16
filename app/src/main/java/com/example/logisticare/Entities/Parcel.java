@@ -20,13 +20,13 @@ public class Parcel {
 
 
     public Parcel(String key, PackType packType, Bool breakable, PackageWeight packageWeight,
-                  Location location, String receiver, Date dateSend, PackStatus packStatus) {
+                  Location location, String receiver_phone, Date dateSend, PackStatus packStatus) {
         this.key = key;
         this.packType = packType;
         this.breakable = breakable;
         this.packageWeight = packageWeight;
         this.location = location;
-        this.receiver_phone = receiver;
+        this.receiver_phone = receiver_phone;
         this.dateSend = new Date(dateSend.getTime());
         this.packStatus = packStatus;
         this.deliveryman_phone = null ;

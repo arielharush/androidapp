@@ -56,10 +56,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     @Override
     public void onClick(View v) {
-        Parcel parcelFromView = getParcelFromView();
+        Parcel parcel = getParcelFromView();
         String key = ParcelsRef.push().getKey();
-        parcelFromView.setKey(key);
-        ParcelsRef.child(key).setValue(parcelFromView);
+        parcel.setKey(key);
+        ParcelsRef.child(key).setValue(parcel);
     }
 
     private void initView() {
@@ -125,7 +125,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         //No need date recived and Phone reciver.. its set in future.
 
         return new Parcel(null,thisParcelType,thisParcelBreakable,thisParcelPackageWeight,
-                           null,null,dateSend,status);
+                           null,thisParcelPhoneNumber,dateSend,status);
     }
 
     //convert date to string
