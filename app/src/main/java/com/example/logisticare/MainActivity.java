@@ -1,13 +1,18 @@
 package com.example.logisticare;
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import android.app.ListActivity;
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Point;
 import android.location.Location;
 import android.os.Bundle;
 import android.os.*;
 import android.provider.ContactsContract;
 import android.view.Display;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -42,8 +47,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     static DatabaseReference ParcelsRef;
     static List<Parcel> parcelList;
     static {
-        FirebaseDatabase database = FirebaseDatabase.getInstance();
+        FirebaseDatabase database = FirebaseDatabase.getInstance("https://dblogisticare.firebaseio.com/");
         ParcelsRef = database.getReference("parcels");
+       // ParcelsRef.setValue("Hello, World!");
         parcelList = new ArrayList<>();
     }
 
@@ -132,5 +138,27 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     public String convertDateToString(Date date){
         SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss");
         return formatter.format(date);
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+
+        MenuInflater menuInflater = getMenuInflater();
+        menuInflater.inflate(R.menu.menu,menu);
+        return true;
+    }
+
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        int id = item.getItemId();
+        switch (id){
+            case R.id.Parcels:
+               // Toast.makeText(this, "ddd", Toast.LENGTH_SHORT).show();
+                startActivity(new Intent(MainActivity.this, parcelsHistory.class));
+                break;
+                default:break;
+        }
+        return true;
     }
 }
