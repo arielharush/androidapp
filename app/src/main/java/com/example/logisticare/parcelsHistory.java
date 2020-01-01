@@ -19,10 +19,18 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-public class parcelsHistory extends AppCompatActivity {
+public class parcelsHistory extends AppCompatActivity  implements View.OnClickListener{
 
     private RecyclerView studentsRecycleView;
     private List<Parcel> students;
+
+
+
+
+
+    public void Toasts(){
+        Toast.makeText(getApplicationContext(),"rtg",Toast.LENGTH_LONG).show();
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,9 +66,8 @@ public class parcelsHistory extends AppCompatActivity {
     }
 
 
-
-
-
-
-
+    @Override
+    public void onClick(View v) {
+        v.setVisibility(View.GONE);
+    }
 }

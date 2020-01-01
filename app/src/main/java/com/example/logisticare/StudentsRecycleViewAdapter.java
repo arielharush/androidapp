@@ -1,9 +1,11 @@
 package com.example.logisticare;
 
 
+import android.app.Activity;
 import android.content.Context;
 
 import android.location.Location;
+import android.opengl.Visibility;
 import android.view.ContextMenu;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -11,7 +13,9 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -22,6 +26,8 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
+import static android.view.View.VISIBLE;
+
 
 /**
  * Created by Yair on 08/12/2019.
@@ -29,6 +35,7 @@ import java.util.List;
 
 public class StudentsRecycleViewAdapter extends RecyclerView.Adapter<StudentsRecycleViewAdapter.StudentViewHolder> {
 
+    private int index_t;
     private Context baseContext;
     List<Parcel> students;
 
@@ -46,6 +53,7 @@ public class StudentsRecycleViewAdapter extends RecyclerView.Adapter<StudentsRec
         return new StudentViewHolder(v);
     }
 
+
     @Override
     public void onBindViewHolder(StudentViewHolder holder, int position) {
 
@@ -62,7 +70,13 @@ public class StudentsRecycleViewAdapter extends RecyclerView.Adapter<StudentsRec
         String uri = "@drawable/myresource";  // where myresource (without the extension) is the file
 
 PackStatus status = holder.packStatus;
+if (student.isBreakable() == true){
 
+    holder.Breakable_parcel.setText("Yes.");
+}else {
+    holder.Breakable_parcel.setText("NO.");
+}
+//holder.Breakable_parcel.setText("");
 if (student.getPackStatus() == PackStatus.SENT){
     holder.imageViewStateParcel.setImageResource(R.drawable.sent_image);
 }
@@ -118,7 +132,9 @@ if (student.getPackStatus() == PackStatus.SENT){
         PackStatus packStatus;
         String deliveryman_phone;
         Date dateReceived;
-        StudentViewHolder(View itemView) {
+        TextView Breakable_parcel;
+
+        StudentViewHolder(final View itemView) {
             super(itemView);
         //    personImageView = itemView.findViewById(R.id.personImageView);
           //  nameTextView = itemView.findViewById(R.id.nameTextView);
@@ -129,22 +145,50 @@ if (student.getPackStatus() == PackStatus.SENT){
             hourSend = itemView.findViewById(R.id.ParcelDateSendTime);
             imageViewStateParcel = itemView.findViewById(R.id.imageStateParcel);
             stateParcel = itemView.findViewById(R.id.StateParcel);
+            Breakable_parcel = itemView.findViewById(R.id.breakable_parcel);
+            final LinearLayout linearLayout = itemView.findViewById(R.id.LinnerParcel);
 
-            // itemView.setOnClickListener();
+itemView.findViewById(R.id.closeButton).setOnClickListener(new View.OnClickListener() {
+    @Override
+    public void onClick(View v) {
+        linearLayout.setVisibility(View.GONE);
+    }
+});
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+
+                  //  int position = getAdapterPosition();
+                  //  String id = students.get(position).getKey();
+                    LinearLayout linearLayout;
+                    if(v.findViewById(R.id.LinnerParcel).getVisibility() == VISIBLE)
+                    {
+
+
+                    }else{
+                        linearLayout =  (LinearLayout)v.findViewById(R.id.LinnerParcel);
+                        linearLayout.setVisibility(VISIBLE);
+
+                    }
+
+                }
+            });
+
+
             itemView.setOnCreateContextMenuListener(new View.OnCreateContextMenuListener() {
 
                 @Override
-                public void onCreateContextMenu(ContextMenu menu, View v, ContextMenu.ContextMenuInfo menuInfo) {
+                public void onCreateContextMenu(ContextMenu menu, final View v, ContextMenu.ContextMenuInfo menuInfo) {
                     menu.setHeaderTitle("Select Action");
 
-                    MenuItem delete = menu.add(Menu.NONE, 1, 1, "Delete");
+                    MenuItem delete = menu.add(Menu.NONE, 1, 1, "Close");
 
                     delete.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
                         @Override
                         public boolean onMenuItemClick(MenuItem item) {
-                            int position = getAdapterPosition();
-                            String id = students.get(position).getKey();
-
+                       //     int position = getAdapterPosition();
+                         ////   String id = students.get(position).getKey();
+                    v.findViewById(R.id.LinnerParcel).setVisibility(View.GONE);
 //                            Firebase_DBManager.removeStudent(id, new Firebase_DBManager.Action<Long>() {
 //                                @Override
 //                                public void onSuccess(Long obj) {
