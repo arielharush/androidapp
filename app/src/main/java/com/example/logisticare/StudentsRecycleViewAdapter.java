@@ -3,11 +3,7 @@ package com.example.logisticare;
 
 import android.content.Context;
 
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.graphics.drawable.Drawable;
 import android.location.Location;
-import android.net.Uri;
 import android.view.ContextMenu;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -19,10 +15,7 @@ import android.widget.TextView;
 
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.logisticare.Entities.Enums.Bool;
 import com.example.logisticare.Entities.Enums.PackStatus;
-import com.example.logisticare.Entities.Enums.PackType;
-import com.example.logisticare.Entities.Enums.PackageWeight;
 import com.example.logisticare.Entities.Parcel;
 
 import java.util.Calendar;

@@ -65,33 +65,36 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         Parcel parcel = getParcelFromView();
         String key = ParcelsRef.push().getKey();
         parcel.setKey(key);
+
         ParcelsRef.child(key).setValue(parcel);
+
+
     }
 
     private void initView() {
         // spinner for type
         type_spinner = (Spinner) findViewById(R.id.type_spinner);
         type_spinner.setAdapter(new ArrayAdapter<PackType>(this,android.R.layout.simple_list_item_1,PackType.values()));
-        ////////////ArrayAdapter<CharSequence> adapter;
-        ////////////adapter = ArrayAdapter.createFromResource(this,R.array.type_list, android.R.layout.simple_spinner_item);
-        ////////////adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        ////////////type_spinner.setAdapter(adapter);
+        ArrayAdapter<CharSequence> adapter;
+     adapter = ArrayAdapter.createFromResource(this,R.array.type_list, android.R.layout.simple_spinner_item);
+      adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        type_spinner.setAdapter(adapter);
 
         //spinner for breakable
         breakable_spinner = (Spinner) findViewById(R.id.breakable_spinner);
-        breakable_spinner.setAdapter(new ArrayAdapter<Bool>(this,android.R.layout.simple_list_item_1,Bool.values()));
-        ////////////ArrayAdapter<CharSequence> adapter_breakable;
-        ////////////adapter_breakable = ArrayAdapter.createFromResource(this,R.array.breakable_list, android.R.layout.simple_spinner_item);
-        ////////////adapter_breakable.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        ////////////breakable_spinner.setAdapter(adapter_breakable);
+     //   breakable_spinner.setAdapter(new ArrayAdapter<Bool>(this,android.R.layout.simple_list_item_1,Bool.values()));
+       ArrayAdapter<CharSequence> adapter_breakable;
+       adapter_breakable = ArrayAdapter.createFromResource(this,R.array.breakable_list, android.R.layout.simple_spinner_item);
+      adapter_breakable.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+       breakable_spinner.setAdapter(adapter_breakable);
 
         //spinner for package weight
         package_weight_spinner = (Spinner) findViewById(R.id.package_weight_spinner);
         package_weight_spinner.setAdapter(new ArrayAdapter<PackageWeight>(this,android.R.layout.simple_list_item_1,PackageWeight.values()));
-        ////////////ArrayAdapter<CharSequence> adapter_package_weight;
-        ////////////adapter_package_weight = ArrayAdapter.createFromResource(this,R.array.Package_weight_list, android.R.layout.simple_spinner_item);
-        ////////////adapter_package_weight.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        ////////////package_weight_spinner.setAdapter(adapter_package_weight);
+        ArrayAdapter<CharSequence> adapter_package_weight;
+        adapter_package_weight = ArrayAdapter.createFromResource(this,R.array.Package_weight_list, android.R.layout.simple_spinner_item);
+        adapter_package_weight.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        package_weight_spinner.setAdapter(adapter_package_weight);
 
         //textView for location
         locationTextView = (TextView)findViewById(R.id.locationTextView);
@@ -108,13 +111,18 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private Parcel getParcelFromView() {
 
         //type
-        PackType thisParcelType = ((PackType)type_spinner.getSelectedItem());
+        PackType thisParcelType = PackType.values()[(int) type_spinner.getSelectedItemId()];
 
         //breakable
-        Bool thisParcelBreakable = ((Bool)breakable_spinner.getSelectedItem());
+      boolean thisParcelBreakable;
+      if (breakable_spinner.getSelectedItemId() ==0){
+          thisParcelBreakable = true;
+      }else{
+          thisParcelBreakable = false;
+      }
 
         //packageWeight
-        PackageWeight thisParcelPackageWeight = ((PackageWeight) package_weight_spinner.getSelectedItem());
+        PackageWeight thisParcelPackageWeight =  PackageWeight.values()[(int) package_weight_spinner.getSelectedItemId()];
 
         //location
         //TODO: convert string type to location type (or maybe remove this field at the view)

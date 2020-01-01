@@ -9,7 +9,7 @@ public class Parcel {
 
     String key;
     PackType packType;
-    Bool breakable;
+    boolean breakable;
     PackageWeight packageWeight;
     Location location;
     String receiver_phone;
@@ -96,7 +96,18 @@ public class Parcel {
 
 
 
-    public Parcel(String key, PackType packType, Bool breakable, PackageWeight packageWeight,
+
+
+
+
+
+
+
+
+
+
+
+    public Parcel(String key, PackType packType, boolean breakable, PackageWeight packageWeight,
                   Location location, String receiver_phone, Date dateSend, PackStatus packStatus) {
         this.key = key;
         this.packType = packType;
@@ -128,7 +139,7 @@ public class Parcel {
     public Parcel() {
        this.key = null;
        this.packType = PackType.ENVELOPE;
-       this.breakable = Bool.No;
+       this.breakable = false;
        this.packageWeight = PackageWeight.UP_TO_500_GR;
        this.location = null;
        this.receiver_phone = null;
@@ -157,11 +168,11 @@ public class Parcel {
         this.packType = packType;
     }
 
-    public Bool isBreakable() {
+    public boolean isBreakable() {
         return breakable;
     }
 
-    public void setBreakable(Bool breakable) {
+    public void setBreakable(boolean breakable) {
         this.breakable = breakable;
     }
 

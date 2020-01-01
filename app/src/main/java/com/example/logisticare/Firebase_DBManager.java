@@ -16,7 +16,10 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+
+import java.lang.reflect.Array;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class Firebase_DBManager {
@@ -43,6 +46,9 @@ public class Firebase_DBManager {
 
         FirebaseDatabase database = FirebaseDatabase.getInstance("https://dblogisticare.firebaseio.com/");
         ParcelsRef = database.getReference("parcels");
+
+        //ParcelsRef.orderByChild("dateSend/day");
+
         ParcelList = new ArrayList<>();
     }
 
@@ -184,7 +190,8 @@ public class Firebase_DBManager {
                     Parcel Parcel = dataSnapshot.getValue(Parcel.class);
                     String id = dataSnapshot.getKey();
                     Parcel.setKey((id));
-                    ParcelList.add(Parcel);
+                    ParcelList.add(0,Parcel);
+                  //  ParcelList.add(Parcel);
 
 
                     notifyDataChange.OnDataChanged(ParcelList);
