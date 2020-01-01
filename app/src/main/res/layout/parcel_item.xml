@@ -10,46 +10,169 @@
     android:layout_margin="10dp"
     android:id="@+id/cv"
     >
-
-    <androidx.constraintlayout.widget.ConstraintLayout
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:weightSum="2"
+    >
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-
-        <ImageView
-            android:id="@+id/personImageView"
-            android:layout_width="150dp"
-            android:layout_height="150dp"
-            card_view:layout_constraintLeft_toLeftOf="parent"
-            card_view:layout_constraintTop_toTopOf="parent" />
-
-        <TextView
-            android:id="@+id/nameTextView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="16dp"
-            android:layout_marginTop="8dp"
-            android:text="student name"
-            android:textSize="30sp"
-            card_view:layout_constraintLeft_toRightOf="@+id/personImageView"
-            card_view:layout_constraintTop_toTopOf="parent" />
-
-        <TextView
-            android:id="@+id/phoneTextView"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:weightSum="2"
+        android:orientation="horizontal"
+        >
+        <LinearLayout
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="16dp"
-            android:layout_marginEnd="32dp"
-            android:layout_marginLeft="32dp"
-            android:layout_marginRight="32dp"
-            android:layout_marginStart="32dp"
-            android:layout_marginTop="8dp"
-            android:gravity="center"
-            android:text="student phone"
-            card_view:layout_constraintBottom_toBottomOf="parent"
-            card_view:layout_constraintEnd_toEndOf="parent"
-            card_view:layout_constraintStart_toEndOf="@+id/personImageView"
-            card_view:layout_constraintTop_toBottomOf="@+id/nameTextView" />
+            android:layout_weight="1"
+            android:layout_height="match_parent">
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+            <TextView
+                android:id="@+id/ParcelType"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="16dp"
+                android:layout_marginTop="8dp"
+                android:text="Parcel type"
+                android:textSize="23sp"
+
+                />
+
+
+        </LinearLayout>
+
+
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="match_parent"
+
+            >
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                >
+
+                <ImageView
+                    android:layout_marginTop="5dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="15dp"
+                    android:src="@drawable/received"
+android:id="@+id/imageStateParcel"
+                    >
+
+                </ImageView>
+
+<TextView
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="2dp"
+    android:text="State"
+    android:layout_gravity="center_horizontal"
+    android:textSize="14dp"
+    android:id="@+id/StateParcel"
+
+
+    />
+            </LinearLayout>
+
+
+        </LinearLayout>
+
+
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:weightSum="2"
+        android:orientation="horizontal"
+        android:layout_weight="1"
+        >
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="match_parent">
+
+
+
+
+            <TextView
+                android:id="@+id/ParcelWeight"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:gravity="start"
+                android:text="Parcel weight"
+                android:textSize="15sp"
+                android:layout_marginLeft="16dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginBottom="5dp"
+                />
+
+        </LinearLayout>
+
+
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="match_parent"
+            android:orientation="horizontal"
+            android:weightSum="3"
+            >
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_weight="2"
+                android:layout_height="match_parent">
+
+                <TextView
+                    android:id="@+id/ParcelDateSend"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:gravity="end"
+                    android:text="Date send"
+                    android:textSize="15sp"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginBottom="5dp"
+                    />
+
+            </LinearLayout>
+
+
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:id="@+id/ParcelDateSendTime"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginEnd="2dp"
+                android:text="Hour"
+                android:textSize="15sp"
+                android:layout_marginTop="8dp"
+                android:layout_marginBottom="5dp"
+                />
+        </LinearLayout>
+
+
+
+
+        </LinearLayout>
+
+
+    </LinearLayout>
+</LinearLayout>
+
 
 </androidx.cardview.widget.CardView>

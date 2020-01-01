@@ -19,6 +19,83 @@ public class Parcel {
     Date dateReceived;
 
 
+    public static String packageWeightTosString(PackageWeight packageWeight){
+        String temp ="";
+
+
+        switch (packageWeight){
+            case UP_TO_500_GR:temp = "Up to 500 GR";
+            break;
+            case UP_TO_1KG:temp ="Up to 1 KG";
+            break;
+            case UP_TO_5KG:temp ="Up to 5 KG";
+            break;
+            case UP_TO_20KG:temp = "Up to 20 KG";
+            default:
+                break;
+        }
+
+
+
+        return temp;
+
+    }
+
+
+
+    public static String PackTypeTosString(PackType packType){
+        String temp ="";
+
+
+        switch (packType){
+            case ENVELOPE:temp = "Envelope";
+                break;
+            case SMALL_PACK:temp ="Small pack";
+                break;
+            case BIG_PACK:temp ="Big pack";
+                break;
+            default:
+                break;
+        }
+
+
+
+        return temp;
+
+    }
+
+    public static String packStatusTosString(PackStatus packStatus){
+        String temp ="";
+
+
+        switch (packStatus){
+            case SENT:temp = "Sent";
+                break;
+            case OFFER_FOR_SHIPPING:temp ="Offer for shipping";
+                break;
+            case IN_THE_WHY:temp ="In the why";
+                break;
+            case RECEIVED:temp = "Received";
+            default:
+                break;
+        }
+
+
+
+        return temp;
+
+    }
+
+
+
+
+
+
+
+
+
+
+
     public Parcel(String key, PackType packType, Bool breakable, PackageWeight packageWeight,
                   Location location, String receiver_phone, Date dateSend, PackStatus packStatus) {
         this.key = key;

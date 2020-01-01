@@ -69,7 +69,7 @@ public class Firebase_DBManager {
 //                    .addOnFailureListener(new OnFailureListener() {
 //                        @Override
 //                        public void onFailure(@NonNull Exception exception) {
-//                            action.onFailure(exception);
+//                            action.onFailur;11e(exception);
 //                            action.onProgress("error upload Parcel image", 100);
 //                        }
 //                    }).addOnProgressListener(new OnProgressListener<UploadTask.TaskSnapshot>() {
