@@ -126,6 +126,120 @@ android:id="@+id/imageStateParcel"
 
            </LinearLayout>
             <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+android:layout_marginEnd="1dp"
+android:layout_marginTop="30dp"
+                android:layout_marginStart="3dp"
+                >
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Receiver phone:"
+                    android:textSize="17dp"
+                    />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="0520000000"
+                    android:layout_marginStart="7dp"
+                    android:id="@+id/phoner"
+android:textSize="17dp"
+                    />
+                <ImageButton
+                    android:layout_marginStart="52dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/tocopyboard"
+                    android:id="@+id/copyrphone"
+                    />
+                <ImageButton
+                    android:layout_marginStart="18dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/call"
+                    android:id="@+id/callrphone"
+                    android:layout_marginEnd="1dp"
+                    />
+
+            </LinearLayout>
+
+
+
+
+
+
+
+
+
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/dphone"
+                android:layout_marginTop="35dp"
+                android:visibility="gone"
+                android:layout_marginStart="3dp"
+                >
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Deliveryman phone:"
+                    android:textSize="17dp"
+                    />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="0520000000"
+                    android:layout_marginStart="7dp"
+                    android:id="@+id/phoned"
+                    android:textSize="17dp"
+                    />
+                <ImageButton
+                    android:layout_marginStart="25dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/tocopyboard"
+                    android:id="@+id/copydphone"
+                    />
+                <ImageButton
+                    android:layout_marginStart="18dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/call"
+                    android:id="@+id/calldphone"
+                    />
+
+            </LinearLayout>
+
+
+
+
+
+<LinearLayout
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="20dp"
+    android:layout_marginBottom="15dp"
+
+    >
+
+    <ImageButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/share"
+        android:layout_marginStart="13dp"
+        android:id="@+id/shareButton"
+        />
+
+
+
+</LinearLayout>
+
+
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:orientation="vertical"

@@ -21,7 +21,7 @@ import java.util.List;
 
 public class parcelsHistory extends AppCompatActivity  implements View.OnClickListener{
 
-    private RecyclerView studentsRecycleView;
+    public RecyclerView studentsRecycleView;
     private List<Parcel> students;
 
 

@@ -67,7 +67,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         parcel.setKey(key);
 
         ParcelsRef.child(key).setValue(parcel);
-
+      //  setClipboard(getApplicationContext(),"12134");
 
     }
 
@@ -155,6 +155,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         menuInflater.inflate(R.menu.menu,menu);
         return true;
     }
+
+
 
 
     @Override

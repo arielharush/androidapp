@@ -1,11 +1,18 @@
 package com.example.logisticare;
 
 
+import android.Manifest;
 import android.app.Activity;
 import android.content.Context;
 
+import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.location.Location;
+import android.location.LocationManager;
+import android.net.Uri;
 import android.opengl.Visibility;
+import android.os.Build;
+import android.util.Log;
 import android.view.ContextMenu;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -17,6 +24,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.core.app.ActivityCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.logisticare.Entities.Enums.PackStatus;
@@ -25,8 +33,14 @@ import com.example.logisticare.Entities.Parcel;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
+import java.io.IOException;
+import java.util.List;
+import java.util.Locale;
+
 
 import static android.view.View.VISIBLE;
+import static androidx.core.app.ActivityCompat.requestPermissions;
+import static androidx.core.content.PermissionChecker.checkSelfPermission;
 
 
 /**
@@ -44,9 +58,21 @@ public class StudentsRecycleViewAdapter extends RecyclerView.Adapter<StudentsRec
         this.baseContext = baseContext;
     }
 
+    private void setClipboard(Context context, String text) {
+        if (android.os.Build.VERSION.SDK_INT < android.os.Build.VERSION_CODES.HONEYCOMB) {
+            android.text.ClipboardManager clipboard = (android.text.ClipboardManager) context.getSystemService(Context.CLIPBOARD_SERVICE);
+            clipboard.setText(text);
+        } else {
+            android.content.ClipboardManager clipboard = (android.content.ClipboardManager) context.getSystemService(Context.CLIPBOARD_SERVICE);
+            android.content.ClipData clip = android.content.ClipData.newPlainText("Copied Text", text);
+            clipboard.setPrimaryClip(clip);
+        }
+    }
+
+
     @Override
     public StudentViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View v = LayoutInflater.from(baseContext.getApplicationContext() ).inflate(R.layout.parcel_item,
+        View v = LayoutInflater.from(baseContext.getApplicationContext()).inflate(R.layout.parcel_item,
                 parent,
                 false);
 
@@ -58,40 +84,42 @@ public class StudentsRecycleViewAdapter extends RecyclerView.Adapter<StudentsRec
     public void onBindViewHolder(StudentViewHolder holder, int position) {
 
         Parcel student = students.get(position);
-        Calendar calendar =  Calendar.getInstance();
+        Calendar calendar = Calendar.getInstance();
         calendar.setTime(student.getDateSend());
-       String date = calendar.get(calendar.DAY_OF_MONTH) + "/" + calendar.get(Calendar.DAY_OF_MONTH) + "/" + calendar.get(Calendar.YEAR);
-      String hour = calendar.get(Calendar.HOUR) + ":"+calendar.get(Calendar.MINUTE);
-       holder.dateSend.setText(date);
-       holder.packType.setText(Parcel.PackTypeTosString(student.getPackType()));
-       holder.packageWeight.setText(Parcel.packageWeightTosString(student.getPackageWeight()));
-       holder.hourSend.setText(hour);
-       holder.stateParcel.setText(Parcel.packStatusTosString(student.getPackStatus()));
+        String date = calendar.get(calendar.DAY_OF_MONTH) + "/" + calendar.get(Calendar.DAY_OF_MONTH) + "/" + calendar.get(Calendar.YEAR);
+        String hour = calendar.get(Calendar.HOUR) + ":" + calendar.get(Calendar.MINUTE);
+        holder.dateSend.setText(date);
+        holder.packType.setText(Parcel.PackTypeTosString(student.getPackType()));
+        holder.packageWeight.setText(Parcel.packageWeightTosString(student.getPackageWeight()));
+        holder.hourSend.setText(hour);
+        holder.stateParcel.setText(Parcel.packStatusTosString(student.getPackStatus()));
         String uri = "@drawable/myresource";  // where myresource (without the extension) is the file
+        holder.phoner.setText(student.getReceiver_phone());
+        PackStatus status = holder.packStatus;
+        if (student.isBreakable() == true) {
 
-PackStatus status = holder.packStatus;
-if (student.isBreakable() == true){
-
-    holder.Breakable_parcel.setText("Yes.");
-}else {
-    holder.Breakable_parcel.setText("NO.");
-}
+            holder.Breakable_parcel.setText("Yes.");
+        } else {
+            holder.Breakable_parcel.setText("No.");
+        }
 //holder.Breakable_parcel.setText("");
-if (student.getPackStatus() == PackStatus.SENT){
-    holder.imageViewStateParcel.setImageResource(R.drawable.sent_image);
-}
-        if (student.getPackStatus() == PackStatus.OFFER_FOR_SHIPPING){
+        if (student.getPackStatus() == PackStatus.SENT) {
+            holder.imageViewStateParcel.setImageResource(R.drawable.sent_image);
+        }
+        if (student.getPackStatus() == PackStatus.OFFER_FOR_SHIPPING) {
             holder.imageViewStateParcel.setImageResource(R.drawable.offer_for_shipping);
         }
-        if (student.getPackStatus() == PackStatus.IN_THE_WHY){
+        if (student.getPackStatus() == PackStatus.IN_THE_WHY) {
             holder.imageViewStateParcel.setImageResource(R.drawable.in_the_why);
+            holder.dphoneLinner.setVisibility(VISIBLE);
         }
-        if (student.getPackStatus() == PackStatus.RECEIVED){
+        if (student.getPackStatus() == PackStatus.RECEIVED) {
             holder.imageViewStateParcel.setImageResource(R.drawable.received);
+            holder.dphoneLinner.setVisibility(VISIBLE);
         }
 //set the image to the imageView
 
-      //  holder.phoneTextView.setText(student.toString());
+        //  holder.phoneTextView.setText(student.toString());
 
         //Load the image using Glide
 //        Glide.with(baseContext.getApplicationContext())
@@ -117,6 +145,7 @@ if (student.getPackStatus() == PackStatus.SENT){
         return students.size();
     }
 
+
     class StudentViewHolder extends RecyclerView.ViewHolder {
 
         TextView dateSend;
@@ -128,17 +157,22 @@ if (student.getPackStatus() == PackStatus.SENT){
         TextView stateParcel;
         Location location;
         String receiver_phone;
-       // Date dateSend;
+        // Date dateSend;
         PackStatus packStatus;
         String deliveryman_phone;
         Date dateReceived;
         TextView Breakable_parcel;
+        final TextView phoner;
+
+        LinearLayout linearLayout;
+        LinearLayout dphoneLinner;
+        TextView phoned;
 
         StudentViewHolder(final View itemView) {
             super(itemView);
-        //    personImageView = itemView.findViewById(R.id.personImageView);
-          //  nameTextView = itemView.findViewById(R.id.nameTextView);
-          //  phoneTextView = itemView.findViewById(R.id.phoneTextView);
+            //    personImageView = itemView.findViewById(R.id.personImageView);
+            //  nameTextView = itemView.findViewById(R.id.nameTextView);
+            //  phoneTextView = itemView.findViewById(R.id.phoneTextView);
             dateSend = itemView.findViewById(R.id.ParcelDateSend);
             packType = itemView.findViewById(R.id.ParcelType);
             packageWeight = itemView.findViewById(R.id.ParcelWeight);
@@ -146,14 +180,86 @@ if (student.getPackStatus() == PackStatus.SENT){
             imageViewStateParcel = itemView.findViewById(R.id.imageStateParcel);
             stateParcel = itemView.findViewById(R.id.StateParcel);
             Breakable_parcel = itemView.findViewById(R.id.breakable_parcel);
-            final LinearLayout linearLayout = itemView.findViewById(R.id.LinnerParcel);
+            linearLayout = itemView.findViewById(R.id.LinnerParcel);
+            phoner = itemView.findViewById(R.id.phoner);
+            phoned = itemView.findViewById(R.id.phoned);
+            dphoneLinner = itemView.findViewById(R.id.dphone);
+            itemView.findViewById(R.id.closeButton).setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    linearLayout.setVisibility(View.GONE);
 
-itemView.findViewById(R.id.closeButton).setOnClickListener(new View.OnClickListener() {
-    @Override
-    public void onClick(View v) {
-        linearLayout.setVisibility(View.GONE);
+                }
+            });
+
+            itemView.findViewById(R.id.shareButton).setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent sendIntent = new Intent();
+                    sendIntent.setAction(Intent.ACTION_SEND);
+                    String text = "Parcel info:";
+                    text =  text + "\n \n";
+                    Parcel parcel = students.get(getAdapterPosition());
+                    text = text + "Parcel type: " +Parcel.PackTypeTosString(parcel.getPackType()) + ".";
+                    text =  text + "\n";
+                    text =  text + "Parcel status: "+ Parcel.packStatusTosString(parcel.getPackStatus())+ ".";
+
+                    sendIntent.putExtra(Intent.EXTRA_TEXT, text);
+
+                    sendIntent.setType("text/plain");
+
+                    Intent shareIntent = Intent.createChooser(sendIntent, null);
+                    baseContext.startActivity(shareIntent);
+                }
+            });
+            itemView.findViewById(R.id.callrphone).setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    // Toast.makeText(baseContext.getApplicationContext(),"Receiver phone copy to \"Clip Board\"",Toast.LENGTH_SHORT).show();
+                    Intent intent = new Intent(Intent.ACTION_DIAL);
+                    intent.setData(Uri.parse("tel:" + phoner.getText().toString()));
+                    baseContext.startActivity(intent);
+                }
+            });
+
+            itemView.findViewById(R.id.calldphone).setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+
+
+                    Intent intent = new Intent(Intent.ACTION_DIAL);
+                    intent.setData(Uri.parse("tel:" + phoned.getText().toString()));
+
+
+
+                    baseContext.startActivity(intent);
+        //     Check the SDK version and whether the permission is already granted or not.
+
+
+
+
+
+
     }
 });
+itemView.findViewById(R.id.copyrphone).setOnClickListener(new View.OnClickListener() {
+    @Override
+    public void onClick(View v) {
+        setClipboard(baseContext, phoner.getText().toString());
+        Toast.makeText(baseContext.getApplicationContext(),"Receiver phone copy to \"Clip Board\"",Toast.LENGTH_SHORT).show();
+    }
+});
+
+            itemView.findViewById(R.id.copydphone).setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    setClipboard(baseContext, phoned.getText().toString());
+                    Toast.makeText(baseContext.getApplicationContext(),"Deliveryman phone copy to \"Clip Board\"",Toast.LENGTH_SHORT).show();
+                }
+            });
+
+
+
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -168,6 +274,7 @@ itemView.findViewById(R.id.closeButton).setOnClickListener(new View.OnClickListe
                     }else{
                         linearLayout =  (LinearLayout)v.findViewById(R.id.LinnerParcel);
                         linearLayout.setVisibility(VISIBLE);
+                    //    Toast.makeText(baseContext.getApplicationContext(),"Receiver phone copy to \"Clip Board\"",Toast.LENGTH_SHORT).show();
 
                     }
 
