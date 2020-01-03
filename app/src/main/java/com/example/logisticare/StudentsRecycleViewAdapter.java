@@ -24,11 +24,13 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.core.app.ActivityCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.logisticare.Entities.Enums.PackStatus;
 import com.example.logisticare.Entities.Parcel;
+import com.google.android.gms.common.internal.Objects;
 
 import java.util.Calendar;
 import java.util.Date;
@@ -52,7 +54,7 @@ public class StudentsRecycleViewAdapter extends RecyclerView.Adapter<StudentsRec
     private int index_t;
     private Context baseContext;
     List<Parcel> students;
-
+private static   int time =0;
     public StudentsRecycleViewAdapter(Context baseContext, List<Parcel> students) {
         this.students = students;
         this.baseContext = baseContext;
@@ -79,15 +81,26 @@ public class StudentsRecycleViewAdapter extends RecyclerView.Adapter<StudentsRec
         return new StudentViewHolder(v);
     }
 
+    @Override
+    public void onViewRecycled(@NonNull StudentViewHolder holder) {
+        super.onViewRecycled(holder);
+        holder.linearLayout.setVisibility(View.GONE);
+        holder.dphoneLinner.setVisibility(View.GONE);
+        holder.linearLayoutdate.setVisibility(View.GONE);
+       // Toast.makeText(baseContext.getApplicationContext(),"f",Toast.LENGTH_SHORT).show();
+
+    }
+
+
 
     @Override
     public void onBindViewHolder(StudentViewHolder holder, int position) {
-
+        long time= System.currentTimeMillis();
         Parcel student = students.get(position);
         Calendar calendar = Calendar.getInstance();
         calendar.setTime(student.getDateSend());
-        String date = calendar.get(calendar.DAY_OF_MONTH) + "/" + calendar.get(Calendar.DAY_OF_MONTH) + "/" + calendar.get(Calendar.YEAR);
-        String hour = calendar.get(Calendar.HOUR) + ":" + calendar.get(Calendar.MINUTE);
+        String date = helperDateAndHour(calendar.get(calendar.DAY_OF_MONTH))  + "/" + helperDateAndHour(calendar.get(Calendar.MONTH) +1 ) + "/" + calendar.get(Calendar.YEAR);
+        String hour = helperDateAndHour(calendar.get(Calendar.HOUR))  + ":" + helperDateAndHour(calendar.get(Calendar.MINUTE));
         holder.dateSend.setText(date);
         holder.packType.setText(Parcel.PackTypeTosString(student.getPackType()));
         holder.packageWeight.setText(Parcel.packageWeightTosString(student.getPackageWeight()));
@@ -95,7 +108,22 @@ public class StudentsRecycleViewAdapter extends RecyclerView.Adapter<StudentsRec
         holder.stateParcel.setText(Parcel.packStatusTosString(student.getPackStatus()));
         String uri = "@drawable/myresource";  // where myresource (without the extension) is the file
         holder.phoner.setText(student.getReceiver_phone());
+        holder.phoned.setText(student.getDeliveryman_phone());
         PackStatus status = holder.packStatus;
+
+        if(student.getDateReceived() != null){
+
+            calendar = Calendar.getInstance();
+            calendar.setTime(student.getDateReceived());
+            date = helperDateAndHour(calendar.get(calendar.DAY_OF_MONTH))  + "/" + helperDateAndHour(calendar.get(Calendar.MONTH) +1 ) + "/" + calendar.get(Calendar.YEAR);
+            hour = helperDateAndHour(calendar.get(Calendar.HOUR))  + ":" + helperDateAndHour(calendar.get(Calendar.MINUTE));
+            holder.dateReceived.setText(date);
+            holder.hourReceived.setText(hour);
+        }
+
+
+
+       // Toast.makeText(baseContext.getApplicationContext(),time + "",Toast.LENGTH_SHORT).show();
         if (student.isBreakable() == true) {
 
             holder.Breakable_parcel.setText("Yes.");
@@ -116,6 +144,8 @@ public class StudentsRecycleViewAdapter extends RecyclerView.Adapter<StudentsRec
         if (student.getPackStatus() == PackStatus.RECEIVED) {
             holder.imageViewStateParcel.setImageResource(R.drawable.received);
             holder.dphoneLinner.setVisibility(VISIBLE);
+            holder.linearLayoutdate.setVisibility(VISIBLE);
+
         }
 //set the image to the imageView
 
@@ -140,13 +170,22 @@ public class StudentsRecycleViewAdapter extends RecyclerView.Adapter<StudentsRec
 
     }
 
+    public String helperDateAndHour(int d){
+
+        if(d < 10){
+            return "0" + d;
+        }else {
+            return  d + "";
+        }
+    }
+
     @Override
     public int getItemCount() {
         return students.size();
     }
 
 
-    class StudentViewHolder extends RecyclerView.ViewHolder {
+    class StudentViewHolder extends RecyclerView.ViewHolder{
 
         TextView dateSend;
         TextView packType;
@@ -160,12 +199,13 @@ public class StudentsRecycleViewAdapter extends RecyclerView.Adapter<StudentsRec
         // Date dateSend;
         PackStatus packStatus;
         String deliveryman_phone;
-        Date dateReceived;
+        TextView dateReceived;
+        TextView hourReceived;
         TextView Breakable_parcel;
         final TextView phoner;
-
-        LinearLayout linearLayout;
-        LinearLayout dphoneLinner;
+        final LinearLayout linearLayoutdate;
+        final LinearLayout linearLayout;
+        final LinearLayout dphoneLinner;
         TextView phoned;
 
         StudentViewHolder(final View itemView) {
@@ -173,6 +213,9 @@ public class StudentsRecycleViewAdapter extends RecyclerView.Adapter<StudentsRec
             //    personImageView = itemView.findViewById(R.id.personImageView);
             //  nameTextView = itemView.findViewById(R.id.nameTextView);
             //  phoneTextView = itemView.findViewById(R.id.phoneTextView);
+            dateReceived = itemView.findViewById(R.id.dateReceived);
+            hourReceived = itemView.findViewById(R.id.hourReceived);
+            linearLayoutdate = itemView.findViewById(R.id.linnerDateReceived);
             dateSend = itemView.findViewById(R.id.ParcelDateSend);
             packType = itemView.findViewById(R.id.ParcelType);
             packageWeight = itemView.findViewById(R.id.ParcelWeight);
@@ -187,7 +230,11 @@ public class StudentsRecycleViewAdapter extends RecyclerView.Adapter<StudentsRec
             itemView.findViewById(R.id.closeButton).setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    linearLayout.setVisibility(View.GONE);
+                    if(true){
+                       linearLayout.setVisibility(View.GONE);
+                        time++;
+
+                    }
 
                 }
             });
@@ -199,10 +246,38 @@ public class StudentsRecycleViewAdapter extends RecyclerView.Adapter<StudentsRec
                     sendIntent.setAction(Intent.ACTION_SEND);
                     String text = "Parcel info:";
                     text =  text + "\n \n";
+                    text =  text + "\n";
                     Parcel parcel = students.get(getAdapterPosition());
                     text = text + "Parcel type: " +Parcel.PackTypeTosString(parcel.getPackType()) + ".";
                     text =  text + "\n";
                     text =  text + "Parcel status: "+ Parcel.packStatusTosString(parcel.getPackStatus())+ ".";
+                    text =  text + "\n";
+                    text =  text + "Parcel Weight: " + Parcel.packageWeightTosString(parcel.getPackageWeight());
+                    Calendar calendar = Calendar.getInstance();
+                    calendar.setTime(parcel.getDateSend());
+                    String date = helperDateAndHour(calendar.get(calendar.DAY_OF_MONTH))  + "/" + helperDateAndHour(calendar.get(Calendar.MONTH) +1 ) + "/" + calendar.get(Calendar.YEAR);
+                    String hour = helperDateAndHour(calendar.get(Calendar.HOUR))  + ":" + helperDateAndHour(calendar.get(Calendar.MINUTE));
+                    text =  text + "\n";
+                    text =  text + "Shipping date: " + date + "      " + hour;
+                    text =  text + "\n";
+                    text =  text + "Receiver phone: " + parcel.getReceiver_phone();
+                    text =  text + "\n";
+                    if (parcel.getPackStatus() == PackStatus.IN_THE_WHY ||parcel.getPackStatus() == PackStatus.RECEIVED) {
+                        text =  text + "Deliveryman phone: " + parcel.getDeliveryman_phone();
+                        text =  text + "\n";
+
+                    }
+                    if(parcel.getPackStatus() == PackStatus.RECEIVED && parcel.getDateReceived() != null){
+
+
+                        calendar.setTime(parcel.getDateReceived());
+                        date = helperDateAndHour(calendar.get(calendar.DAY_OF_MONTH))  + "/" + helperDateAndHour(calendar.get(Calendar.MONTH) +1 ) + "/" + calendar.get(Calendar.YEAR);
+                        hour = helperDateAndHour(calendar.get(Calendar.HOUR))  + ":" + helperDateAndHour(calendar.get(Calendar.MINUTE));
+
+                        text =  text + "Date Received: " + date + "      " + hour;
+                        text =  text + "\n";
+                    }
+
 
                     sendIntent.putExtra(Intent.EXTRA_TEXT, text);
 

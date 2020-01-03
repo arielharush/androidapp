@@ -60,7 +60,7 @@
                 >
 
                 <ImageView
-                    android:layout_marginTop="5dp"
+                    android:layout_marginTop="8dp"
                     android:layout_width="wrap_content"
                     android:layout_height="15dp"
                     android:src="@drawable/received"
@@ -125,6 +125,40 @@ android:id="@+id/imageStateParcel"
                    />
 
            </LinearLayout>
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:id="@+id/linnerDateReceived"
+                android:visibility="gone"
+                >
+
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Date Received:"
+                    android:textSize="18dp"
+                    android:layout_marginStart="4dp"
+                    />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="14/10/1998"
+                    android:layout_marginStart="12dp"
+                    android:textSize="18dp"
+                    android:id="@+id/dateReceived"
+                    />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="08:00"
+                    android:layout_marginStart="20dp"
+                    android:textSize="18dp"
+                    android:id="@+id/hourReceived"
+                    />
+
+            </LinearLayout>
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"

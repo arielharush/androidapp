@@ -1,11 +1,19 @@
 package com.example.logisticare;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+
+import android.Manifest;
+import android.annotation.SuppressLint;
 import android.app.ListActivity;
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.graphics.Point;
+import android.location.Address;
+import android.location.Geocoder;
 import android.location.Location;
+import android.location.LocationListener;
+import android.location.LocationManager;
 import android.os.Bundle;
 import android.os.*;
 import android.provider.ContactsContract;
@@ -24,12 +32,16 @@ import com.example.logisticare.Entities.Parcel;
 import com.example.logisticare.Entities.User;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
+
+import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Locale;
+
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.example.logisticare.Entities.Enums.*;
@@ -42,7 +54,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     Spinner package_weight_spinner;
     TextView locationTextView;
     TextInputEditText TextInputEditTextPhoneNumber;
+    // Acquire a reference to the system Location Manager
+    LocationManager locationManager;
+    Location parcelLocation;
 
+    // Define a listener that responds to location updates
+    LocationListener locationListener;
     //init DB
     static DatabaseReference ParcelsRef;
     static List<Parcel> parcelList;
@@ -58,10 +75,18 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         initView();
+getLocation();
     }
 
     @Override
     public void onClick(View v) {
+        if(TextInputEditTextPhoneNumber.length() <10){
+
+            Toast.makeText(getApplicationContext(),"Invalid phone number",Toast.LENGTH_SHORT).show();
+            return;
+        }
+        Button sendButton = (Button)findViewById(R.id.sendButton);
+        sendButton.setClickable(false);
         Parcel parcel = getParcelFromView();
         String key = ParcelsRef.push().getKey();
         parcel.setKey(key);
@@ -69,6 +94,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         ParcelsRef.child(key).setValue(parcel);
       //  setClipboard(getApplicationContext(),"12134");
 
+        TextInputEditTextPhoneNumber.setText("");
+        sendButton.setClickable(true);
     }
 
     private void initView() {
@@ -95,7 +122,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         adapter_package_weight = ArrayAdapter.createFromResource(this,R.array.Package_weight_list, android.R.layout.simple_spinner_item);
         adapter_package_weight.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         package_weight_spinner.setAdapter(adapter_package_weight);
-
+        parcelLocation = new Location("a");
         //textView for location
         locationTextView = (TextView)findViewById(R.id.locationTextView);
 
@@ -106,7 +133,94 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         // textInputLayout.getEditText().setText("23");
         //Button sendButton = (Button) findViewById(R.id.sendButton);
         //sendButton.setOnClickListener(this);
+        locationManager = (LocationManager) this.getSystemService(Context.LOCATION_SERVICE);
+
+
+        // Define a listener that responds to location updates
+        locationListener = new LocationListener() {
+            public void onLocationChanged(Location location) {
+                // Called when a new location is found by the network location provider.
+                //    Toast.makeText(getBaseContext(), location.toString(), Toast.LENGTH_LONG).show();
+                parcelLocation.setLatitude(location.getLatitude());
+                parcelLocation.setLongitude(location.getLongitude());
+                locationTextView.setText(getPlace(location));////location.toString());
+
+                // Remove the listener you previously added
+                //  locationManager.removeUpdates(locationListener);
+            }
+
+            public void onStatusChanged(String provider, int status, Bundle extras) {
+            }
+
+            public void onProviderEnabled(String provider) {
+            }
+
+            public void onProviderDisabled(String provider) {
+            }
+        };
     }
+
+
+    private void getLocation() {
+
+        //     Check the SDK version and whether the permission is already granted or not.
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M && checkSelfPermission(Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+            requestPermissions(new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, 5);
+
+        } else {
+            // Android version is lesser than 6.0 or the permission is already granted.
+         //   stopUpdateButton.setEnabled(true);
+          //  getLocationButton.setEnabled(false);
+            locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0, locationListener);
+        }
+
+    }
+
+
+    public String getPlace(Location location) {
+
+        Geocoder geocoder = new Geocoder(this, Locale.getDefault());
+        List<Address> addresses = null;
+        try {
+            addresses = geocoder.getFromLocation(location.getLatitude(), location.getLongitude(), 1);
+
+            if (addresses.size() > 0) {
+                String cityName = addresses.get(0).getAddressLine(0);
+                String stateName = addresses.get(0).getAddressLine(1);
+                String countryName = addresses.get(0).getAddressLine(2);
+                return cityName;
+            }
+
+            return "no place: \n (" + location.getLongitude() + " , " + location.getLatitude() + ")";
+        } catch (
+                IOException e)
+
+        {
+            e.printStackTrace();
+        }
+        return "IOException ...";
+    }
+
+    @SuppressLint("MissingPermission")
+    @Override
+    public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
+        if (requestCode == 5) {
+            if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                // Permission is granted
+            //    stopUpdateButton.setEnabled(true);
+              //  getLocationButton.setEnabled(false);
+                locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0, locationListener);
+
+            } else {
+                Toast.makeText(this, "Until you grant the permission, we canot display the location", Toast.LENGTH_SHORT).show();
+            }
+        }
+
+    }
+
+
+
+
 
     private Parcel getParcelFromView() {
 
@@ -138,8 +252,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         //No need date recived and Phone reciver.. its set in future.
 
-        return new Parcel(null,thisParcelType,thisParcelBreakable,thisParcelPackageWeight,
+        Parcel parcel = new Parcel(null,thisParcelType,thisParcelBreakable,thisParcelPackageWeight,
                            null,thisParcelPhoneNumber,dateSend,status);
+        parcel.setLongitude(parcelLocation.getLongitude());
+        parcel.setLatitude(parcelLocation.getLatitude());
+        parcel.setDateReceived(new Date());
+        return parcel;
+
     }
 
     //convert date to string
