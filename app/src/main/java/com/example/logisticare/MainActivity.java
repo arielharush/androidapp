@@ -80,6 +80,9 @@ getLocation();
 
     @Override
     public void onClick(View v) {
+
+
+        // check if the number is valid
         if(TextInputEditTextPhoneNumber.length() <10){
 
             Toast.makeText(getApplicationContext(),"Invalid phone number",Toast.LENGTH_SHORT).show();
@@ -92,11 +95,30 @@ getLocation();
         parcel.setKey(key);
 
         ParcelsRef.child(key).setValue(parcel);
-      //  setClipboard(getApplicationContext(),"12134");
+
+
+
+        ///  clear the feilds
+      clearFileds();
+
+        // send to firebase
+        sendButton.setClickable(true);
+
+
+        // msg to user that parcel added successfuly to the system
+
+        Toast.makeText(getApplicationContext(), "The parcel added successfully.", Toast.LENGTH_SHORT).show();;
+    }
+
+
+    private  void clearFileds(){
 
         TextInputEditTextPhoneNumber.setText("");
-        sendButton.setClickable(true);
+        type_spinner.setSelection(0);
+        breakable_spinner.setSelection(0);
+        package_weight_spinner.setSelection(0);
     }
+
 
     private void initView() {
         // spinner for type
@@ -159,6 +181,8 @@ getLocation();
             }
         };
     }
+
+
 
 
     private void getLocation() {
@@ -267,6 +291,9 @@ getLocation();
         return formatter.format(date);
     }
 
+
+
+    // create the menu on the bar
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
 
@@ -277,6 +304,8 @@ getLocation();
 
 
 
+
+    // func for menu in the bar
 
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {

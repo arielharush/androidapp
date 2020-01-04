@@ -43,13 +43,13 @@ public class Parcel {
 
 
         switch (packageWeight){
-            case UP_TO_500_GR:temp = "Up to 500 GR";
+            case UP_TO_500_GR:temp = "Up to 500 gr";
             break;
-            case UP_TO_1KG:temp ="Up to 1 KG";
+            case UP_TO_1KG:temp ="Up to 1 kg";
             break;
-            case UP_TO_5KG:temp ="Up to 5 KG";
+            case UP_TO_5KG:temp ="Up to 5 kg";
             break;
-            case UP_TO_20KG:temp = "Up to 20 KG";
+            case UP_TO_20KG:temp = "Up to 20 kg";
             default:
                 break;
         }

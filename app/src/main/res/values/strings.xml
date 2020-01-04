@@ -20,5 +20,6 @@
     <string name="type_of_the_pack">Type of the pack</string>
     <string name="Location_of_the_pack">Parcel location</string>
     <string name="breakable">Breakable?</string>
+    <string name="title_activity_main2">Main2Activity</string>
 
 </resources>

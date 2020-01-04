@@ -6,7 +6,20 @@
     android:title=""
     android:icon="@drawable/ic_history_black_24dp"
     app:showAsAction="always"
+
     >
 
 </item>
+
+
+    <item
+        android:id="@+id/Prcels"
+        android:title=""
+        android:icon="@drawable/ic_qr_code_scan"
+        app:showAsAction="always"
+
+        >
+
+    </item>
+
 </menu>
